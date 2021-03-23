@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Group>
-    <Button xmlns:fx="http://javafx.com/fxml/1" text="test" />
+<Group fx:id="root" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ee.khk.MainController">
+    <Button text="test" onAction="#click" fx:id="btn" />
 </Group>
 
