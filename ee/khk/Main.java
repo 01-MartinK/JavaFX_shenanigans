@@ -2,6 +2,8 @@ package ee.khk;
 
 import com.sun.prism.Material;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +17,9 @@ import javafx.scene.text.Text;
 import java.awt.*;
 
 public class Main extends Application {
+
+    public static int test = 0;
+
     public static void main(String[] args){
         Application.launch(args);
     }
@@ -23,7 +28,18 @@ public class Main extends Application {
     public void start(Stage stage){
 
         Label label = new Label("Tere tulemast põrgusse!");
+        label.setText(String.valueOf(test));
         Button button = new Button("Button");
+
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                test++;
+                label.setText(String.valueOf(test));
+            }
+        });
+
         Group group = new Group(button);
 
         FlowPane root = new FlowPane(label, group);
