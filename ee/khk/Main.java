@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.stage.Stage;
@@ -29,8 +30,12 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
-        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Scene scene = new Scene(root);
+        Label lbl = new Label("welcome");
+        Button btn = new Button("test");
+
+        VBox root = new VBox();
+        root.getChildren().addAll(lbl,btn);
+        Scene scene = new Scene(root,300,300);
 
         stage.setScene(scene);
 
