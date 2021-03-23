@@ -34,6 +34,7 @@ public class Main extends Application {
         stage.setWidth(320);
         stage.setHeight(320);
         stage.show();
+        stage.hide();
     }
 
     public void init() throws Exception {
