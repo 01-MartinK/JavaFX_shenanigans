@@ -4,6 +4,8 @@ import com.sun.prism.Material;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,29 +27,18 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) throws Exception{
 
-        Label label = new Label("Tere tulemast põrgusse!");
-        label.setText(String.valueOf(test));
-        Button button = new Button("Button");
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Scene scene = new Scene(root);
 
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                test++;
-                label.setText(String.valueOf(test));
-            }
-        });
-
-        Group group = new Group(button);
-
-        FlowPane root = new FlowPane(label, group);
-        Scene scene = new Scene(root, 300, 300, Color.BLUE);
         stage.setScene(scene);
 
-        stage.setTitle("Welcome to purgatory");
+        stage.setTitle("test FXML");
+        stage.setWidth(300);
+        stage.setHeight(300);
 
         stage.show();
+
     }
 }
