@@ -2,46 +2,36 @@ package ee.khk;
 
 import com.sun.prism.Material;
 import javafx.application.Application;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
 
+import java.awt.*;
+
 public class Main extends Application {
     public static void main(String[] args){
         Application.launch(args);
-        System.out.println("Appication run");
     }
 
+    @Override
     public void start(Stage stage){
-        System.out.println("Application starts");
-        Text text = new Text("Tere tulemast põrgusse!");
-        Box box = new Box();
-        box.setWidth(50.0);
-        box.setHeight(50.0);
-        box.setLayoutY(100);
-        box.setLayoutX(100);
-        text.setLayoutY(100);
-        text.setLayoutX(100);
 
-        Group group = new Group(text,box);
+        Label label = new Label("Tere tulemast põrgusse!");
+        Button button = new Button("Button");
+        Group group = new Group(button);
 
-        Scene scene = new Scene(group);
-
+        FlowPane root = new FlowPane(label, group);
+        Scene scene = new Scene(root, 300, 300, Color.BLUE);
         stage.setScene(scene);
-        stage.setTitle("Morning Anouncement");
-        stage.setWidth(320);
-        stage.setHeight(320);
+
+        stage.setTitle("Welcome to purgatory");
+
         stage.show();
-        stage.hide();
-    }
-
-    public void init() throws Exception {
-        System.out.println("Application inits");
-    }
-
-    public void stop() throws Exception {
-        System.out.println("Application stops");
     }
 }
