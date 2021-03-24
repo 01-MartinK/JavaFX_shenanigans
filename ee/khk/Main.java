@@ -18,10 +18,11 @@ import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 import java.awt.*;
+import java.util.concurrent.Flow;
 
 public class Main extends Application {
 
-    public static int test = 0;
+    public static int clicks = 0;
 
     public static void main(String[] args){
         Application.launch(args);
@@ -33,9 +34,20 @@ public class Main extends Application {
         Label lbl = new Label("welcome");
         Button btn = new Button("test");
 
-        VBox root = new VBox();
+        lbl.setPrefWidth(80);
+        btn.setPrefWidth(80);
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                clicks++;
+                lbl.setText(String.valueOf(clicks));
+            }
+        });
+
+        FlowPane root = new FlowPane();
         root.getChildren().addAll(lbl,btn);
-        Scene scene = new Scene(root,300,300);
+        Scene scene = new Scene(root,100,100);
 
         stage.setScene(scene);
 
