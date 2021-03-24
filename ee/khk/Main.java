@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +20,7 @@ import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 import java.awt.*;
+import java.util.Timer;
 import java.util.concurrent.Flow;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -29,6 +31,7 @@ public class Main extends Application {
     Checkbox clickCount;
     CheckBox showClickCount;
     Label lbl;
+    ToggleButton autoClicker;
 
     public static void main(String[] args){
         Application.launch(args);
@@ -37,12 +40,17 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
+        Timer tmr = new Timer();
+        tmr.wait(5000);
+
         CheckBox clickCount = new CheckBox("Count Clicks");
         CheckBox doubleClick = new CheckBox("Click Doubled");
         CheckBox showClickCount = new CheckBox("Show clicks");
         clickCount.setSelected(true);
         showClickCount.setSelected(true);
         showClickCount.setOnAction(event -> show());
+
+        ToggleButton autoClicker = new ToggleButton("Auto Click");
 
         Label lbl = new Label("clicks : 0");
         Button btn = new Button("test");
@@ -67,7 +75,7 @@ public class Main extends Application {
         });
 
         FlowPane root = new FlowPane(Orientation.VERTICAL,0,10);
-        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount);
+        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker);
         Scene scene = new Scene(root,100,100);
 
         stage.setScene(scene);
