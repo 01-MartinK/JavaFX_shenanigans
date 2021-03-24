@@ -2,6 +2,11 @@ package ee.khk;
 
 import com.sun.prism.Material;
 import javafx.application.Application;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -31,6 +36,7 @@ import javax.swing.*;
 public class Main extends Application {
 
     public static int clicks = 0;
+    public static String text = "";
     Checkbox clickCount;
     CheckBox showClickCount;
     Label lbl;
@@ -51,15 +57,28 @@ public class Main extends Application {
         showClickCount.setSelected(true);
         showClickCount.setOnAction(event -> show());
 
+        ObservableList<String> langs = FXCollections.observableArrayList("java","C#","Python","Quack","Crack");
+        ListView<String> langsViewList = new ListView<String>(langs);
+
+        MultipleSelectionModel<String> langSelectionModel = langsViewList.getSelectionModel();
+
+        langSelectionModel.selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                text = newValue;
+                lbl.setText(text + " lines coded: " + String.valueOf(clicks));
+            }
+        });
+
         ToggleButton autoClicker = new ToggleButton("Auto Click");
 
-        Label lbl = new Label("clicks : 0");
+        Label lbl = new Label(text+" lines coded: 0");
         Button btn = new Button("test");
         TextArea txa = new TextArea();
 
         txa.setPrefRowCount(2);
         txa.setPrefColumnCount(5);
-        lbl.setPrefWidth(80);
+        lbl.setPrefWidth(150);
         lbl.setAlignment(Pos.CENTER);
         btn.setPrefWidth(80);
         btn.setPrefHeight(40);
@@ -76,21 +95,21 @@ public class Main extends Application {
                     }else{
                         clicks++;
                     }
-                    if (showClickCount.isSelected()){ lbl.setText("clicks: " + String.valueOf(clicks));}
+                    if (showClickCount.isSelected()){ lbl.setText(text + " lines coded: " + String.valueOf(clicks));}
                 }
             }
         });
 
         FlowPane root = new FlowPane(Orientation.VERTICAL,10,10);
-        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker, txa);
+        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker, txa, langsViewList);
         root.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(root,100,100);
+        Scene scene = new Scene(root,0,0);
 
         stage.setScene(scene);
 
         stage.setTitle("test FXML");
-        stage.setWidth(300);
-        stage.setHeight(300);
+        stage.setWidth(600);
+        stage.setHeight(600);
 
         stage.show();
 
