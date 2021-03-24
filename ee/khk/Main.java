@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
@@ -19,10 +20,15 @@ import javafx.scene.text.Text;
 
 import java.awt.*;
 import java.util.concurrent.Flow;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 
 public class Main extends Application {
 
     public static int clicks = 0;
+    Checkbox clickCount;
+    CheckBox showClickCount;
+    Label lbl;
 
     public static void main(String[] args){
         Application.launch(args);
@@ -31,22 +37,37 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
-        Label lbl = new Label("welcome");
+        CheckBox clickCount = new CheckBox("Count Clicks");
+        CheckBox doubleClick = new CheckBox("Click Doubled");
+        CheckBox showClickCount = new CheckBox("Show clicks");
+        clickCount.setSelected(true);
+        showClickCount.setSelected(true);
+        showClickCount.setOnAction(event -> show());
+
+        Label lbl = new Label("clicks : 0");
         Button btn = new Button("test");
 
         lbl.setPrefWidth(80);
         btn.setPrefWidth(80);
 
+
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                clicks++;
-                lbl.setText(String.valueOf(clicks));
+                if (clickCount.isSelected()) {
+                    if (doubleClick.isSelected()){
+                        clicks++;
+                        clicks++;
+                    }else{
+                        clicks++;
+                    }
+                    if (showClickCount.isSelected()){ lbl.setText("clicks: " + String.valueOf(clicks));}
+                }
             }
         });
 
-        FlowPane root = new FlowPane();
-        root.getChildren().addAll(lbl,btn);
+        FlowPane root = new FlowPane(Orientation.VERTICAL,0,10);
+        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount);
         Scene scene = new Scene(root,100,100);
 
         stage.setScene(scene);
@@ -57,5 +78,14 @@ public class Main extends Application {
 
         stage.show();
 
+    }
+
+    private void show(){
+
+        if (showClickCount.isSelected()) {
+            lbl.setText("Clicks = "+String.valueOf(clicks));
+        }else{
+            lbl.setText("Wont show clicks to you!");
+        }
     }
 }
