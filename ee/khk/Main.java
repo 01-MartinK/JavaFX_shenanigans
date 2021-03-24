@@ -57,8 +57,8 @@ public class Main extends Application {
         Button btn = new Button("test");
         TextArea txa = new TextArea();
 
-        //txa.setPrefRowCount(2);
-        //txa.setPrefColumnCount(5);
+        txa.setPrefRowCount(2);
+        txa.setPrefColumnCount(5);
         lbl.setPrefWidth(80);
         lbl.setAlignment(Pos.CENTER);
         btn.setPrefWidth(80);
