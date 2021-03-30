@@ -70,8 +70,8 @@ public class Main extends Application {
             }
         });
 
-        //ComboBox<String> comboBox = new ComboBox<String>(langs);
-        //comboBox.setOnAction(event -> text = comboBox.getValue());
+        ComboBox<String> comboBox = new ComboBox<String>(langs);
+        comboBox.setOnAction(event -> text = comboBox.getValue());
 
         ChoiceBox<String> choiceBox = new ChoiceBox<String>(langs);
         choiceBox.setOnAction(event -> text = choiceBox.getValue());
