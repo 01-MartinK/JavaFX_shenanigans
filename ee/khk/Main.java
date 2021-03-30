@@ -76,6 +76,16 @@ public class Main extends Application {
         clickCount.setSelected(true);
         showClickCount.setSelected(true);
         showClickCount.setOnAction(event -> show());
+        showClickCount.setTooltip(new Tooltip("Shows clickcount or displays them when you are clicking!"));
+
+        Slider slider = new Slider(0.0,5.0,1.0);
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setBlockIncrement(2.0);
+        slider.setMajorTickUnit(5.0);
+        slider.setMinorTickCount(4);
+        slider.setSnapToTicks(true);
+        slider.setTooltip(new Tooltip("The value of how many clicks to programm"));
 
         ObservableList<String> langs = FXCollections.observableArrayList("java","C#","Python","Quack","Crack");
         ListView<String> langsViewList = new ListView<String>(langs);
@@ -92,15 +102,18 @@ public class Main extends Application {
 
         ComboBox<String> comboBox = new ComboBox<String>(langs);
         comboBox.setOnAction(event -> text = comboBox.getValue());
+        comboBox.setTooltip(new Tooltip("Combobox example!"));
 
         ChoiceBox<String> choiceBox = new ChoiceBox<String>(langs);
         choiceBox.setOnAction(event -> text = choiceBox.getValue());
+        choiceBox.setTooltip(new Tooltip("Choicebox example!"));
 
         ToggleButton autoClicker = new ToggleButton("Auto Click");
 
         Label lbl = new Label(text+" lines coded: 0");
         Button btn = new Button("test");
         TextArea txa = new TextArea();
+        txa.setTooltip(new Tooltip("A writable box example or textbox or textarea or lineedit."));
 
         txa.setPrefRowCount(2);
         txa.setPrefColumnCount(5);
@@ -108,19 +121,19 @@ public class Main extends Application {
         lbl.setAlignment(Pos.CENTER);
         btn.setPrefWidth(80);
         btn.setPrefHeight(40);
+        btn.setTooltip(new Tooltip("Programm a line of code. Not really"));
 
         TreeView<String> langsTreeView = new TreeView<String>(rootTreeNode);
-
+        langsTreeView.setTooltip(new Tooltip("Tree example! with languages!"));
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 if (clickCount.isSelected()) {
                     if (doubleClick.isSelected()){
-                        clicks++;
-                        clicks++;
+                        clicks += slider.getValue()*2;
                     }else{
-                        clicks++;
+                        clicks += slider.getValue();
                     }
                     if (showClickCount.isSelected()){ lbl.setText(text + " lines coded: " + String.valueOf(clicks));}
                 }
@@ -129,7 +142,7 @@ public class Main extends Application {
 
         // Tseeni asjad ja muud
         FlowPane root = new FlowPane(Orientation.VERTICAL,10,10);
-        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker, txa, langsViewList, comboBox, choiceBox, langsTreeView);
+        root.getChildren().addAll( lbl, btn, clickCount, slider, showClickCount, autoClicker, txa, langsViewList, comboBox, choiceBox, langsTreeView);
         root.setAlignment(Pos.CENTER);
         Scene scene = new Scene(root,0,0);
 
