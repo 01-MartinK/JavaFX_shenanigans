@@ -1,6 +1,5 @@
 package ee.khk;
 
-import com.sun.prism.Material;
 import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
@@ -50,6 +49,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 
+        // Nupud ja muud asjad
         CheckBox clickCount = new CheckBox("Count Clicks");
         RadioButton doubleClick = new RadioButton("Click Doubled");
         CheckBox showClickCount = new CheckBox("Show clicks");
@@ -69,6 +69,12 @@ public class Main extends Application {
                 lbl.setText(text + " lines coded: " + String.valueOf(clicks));
             }
         });
+
+        //ComboBox<String> comboBox = new ComboBox<String>(langs);
+        //comboBox.setOnAction(event -> text = comboBox.getValue());
+
+        ChoiceBox<String> choiceBox = new ChoiceBox<String>(langs);
+        choiceBox.setOnAction(event -> text = choiceBox.getValue());
 
         ToggleButton autoClicker = new ToggleButton("Auto Click");
 
@@ -100,15 +106,16 @@ public class Main extends Application {
             }
         });
 
+        // Tseeni asjad ja muud
         FlowPane root = new FlowPane(Orientation.VERTICAL,10,10);
-        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker, txa, langsViewList);
+        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker, txa, langsViewList, comboBox, choiceBox);
         root.setAlignment(Pos.CENTER);
         Scene scene = new Scene(root,0,0);
 
         stage.setScene(scene);
 
         stage.setTitle("test FXML");
-        stage.setWidth(600);
+        stage.setWidth(1000);
         stage.setHeight(600);
 
         stage.show();
