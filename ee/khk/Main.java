@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
@@ -48,6 +49,25 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
+
+        // puu asjad
+        // määrame juurelemendi
+        TreeItem<String> rootTreeNode = new TreeItem<String>("Keeled");
+
+        // määrame sõlmed
+        TreeItem<String> germanics = new TreeItem<String>("germanics");
+        germanics.getChildren().add(new TreeItem<String>("German"));
+        germanics.getChildren().add(new TreeItem<String>("English"));
+
+        TreeItem<String> Roman = new TreeItem<String>("Roman");
+        Roman.getChildren().add(new TreeItem<String>("French"));
+        Roman.getChildren().add(new TreeItem<String>("Spanish"));
+        Roman.getChildren().add(new TreeItem<String>("Italian"));
+
+        // lisame rooti
+        rootTreeNode.getChildren().add(germanics);
+        rootTreeNode.getChildren().add(Roman);
+
 
         // Nupud ja muud asjad
         CheckBox clickCount = new CheckBox("Count Clicks");
@@ -89,6 +109,7 @@ public class Main extends Application {
         btn.setPrefWidth(80);
         btn.setPrefHeight(40);
 
+        TreeView<String> langsTreeView = new TreeView<String>(rootTreeNode);
 
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -108,7 +129,7 @@ public class Main extends Application {
 
         // Tseeni asjad ja muud
         FlowPane root = new FlowPane(Orientation.VERTICAL,10,10);
-        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker, txa, langsViewList, comboBox, choiceBox);
+        root.getChildren().addAll( lbl, btn, clickCount, doubleClick, showClickCount, autoClicker, txa, langsViewList, comboBox, choiceBox, langsTreeView);
         root.setAlignment(Pos.CENTER);
         Scene scene = new Scene(root,0,0);
 
